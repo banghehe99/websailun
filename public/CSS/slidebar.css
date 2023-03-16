@@ -1,0 +1,152 @@
+#slidebar {
+    position: absolute; 
+    left: 5px; top: 11px; 
+    width: 198px; height: 686px;
+    background-color: rgb(87, 24, 214); 
+}
+/*Nút Màn chính*/
+#bbt_screen_manin {
+    border: none; 
+    background-color: rgb(233, 15, 149);  
+    color: rgb(255, 255, 255);  
+    text-align: center; 
+    display: inline-block;
+    font-size: 13px; 
+    font-weight: normal;
+    cursor: pointer;
+    position: absolute; 
+    width: 150px; height: 40px; 
+    left: 22px; top: 20px;
+}
+/*Nút Màn 1*/
+#bbt_tram2{
+    border: none; 
+    background-color: rgb(240, 236, 11);
+    border: none; color: rgb(0, 0, 0);  
+    text-align: center; 
+    display: inline-block;
+    font-size: 13px; 
+    font-weight: normal;
+    cursor: pointer;
+    position: absolute; 
+    width: 150px; height: 40px; 
+    left: 22px; top: 70px;
+}
+/*Nút Màn 2*/
+#bbt_tram3 {
+    border: none; 
+    background-color: rgb(11, 167, 240); 
+    border: none; color: rgb(255, 255, 255);  
+    text-align: center; 
+    display: inline-block;
+    font-size: 13px; 
+    font-weight: normal;
+    cursor: pointer;
+    position: absolute; 
+    width: 150px; height: 40px; 
+    left: 22px; top: 120px;
+}
+#bbt_tram4 {
+    border: none; 
+    background-color: rgb(51, 153, 128); 
+    border: none; color: rgb(255, 255, 255);  
+    text-align: center; 
+    display: inline-block;
+    font-size: 13px; 
+    font-weight: normal;
+    cursor: pointer;
+    position: absolute; 
+    width: 150px; height: 40px; 
+    left: 22px; top: 170px;
+}
+#bbt_tram5 {
+    border: none; 
+    background-color: rgb(51, 153, 128); 
+    border: none; color: rgb(255, 255, 255);  
+    text-align: center; 
+    display: inline-block;
+    font-size: 13px; 
+    font-weight: normal;
+    cursor: pointer;
+    position: absolute; 
+    width: 150px; height: 40px; 
+    left: 22px; top: 220px;
+}
+#bbt_tram9 {
+    border: none; 
+    background-color: rgb(51, 153, 128); 
+    border: none; color: rgb(255, 255, 255);  
+    text-align: center; 
+    display: inline-block;
+    font-size: 13px; 
+    font-weight: normal;
+    cursor: pointer;
+    position: absolute; 
+    width: 150px; height: 40px; 
+    left: 22px; top: 270px;
+}
+#bbt_tram10 {
+    border: none; 
+    background-color: rgb(51, 153, 128); 
+    border: none; color: rgb(255, 255, 255);  
+    text-align: center; 
+    display: inline-block;
+    font-size: 13px; 
+    font-weight: normal;
+    cursor: pointer;
+    position: absolute; 
+    width: 150px; height: 40px; 
+    left: 22px; top: 320px;
+}
+#bbt_tram11 {
+    border: none; 
+    background-color: rgb(51, 153, 128); 
+    border: none; color: rgb(255, 255, 255);  
+    text-align: center; 
+    display: inline-block;
+    font-size: 13px; 
+    font-weight: normal;
+    cursor: pointer;
+    position: absolute; 
+    width: 150px; height: 40px; 
+    left: 22px; top: 370px;
+}
+#bbt_tram12 {
+    border: none; 
+    background-color: rgb(51, 153, 128); 
+    border: none; color: rgb(255, 255, 255);  
+    text-align: center; 
+    display: inline-block;
+    font-size: 13px; 
+    font-weight: normal;
+    cursor: pointer;
+    position: absolute; 
+    width: 150px; height: 40px; 
+    left: 22px; top: 420px;
+}
+#bbt_tram14 {
+    border: none; 
+    background-color: rgb(51, 153, 128); 
+    border: none; color: rgb(255, 255, 255);  
+    text-align: center; 
+    display: inline-block;
+    font-size: 13px; 
+    font-weight: normal;
+    cursor: pointer;
+    position: absolute; 
+    width: 150px; height: 40px; 
+    left: 22px; top: 470px;
+}
+#bbt_tram15 {
+    border: none; 
+    background-color: rgb(51, 153, 128); 
+    border: none; color: rgb(255, 255, 255);  
+    text-align: center; 
+    display: inline-block;
+    font-size: 13px; 
+    font-weight: normal;
+    cursor: pointer;
+    position: absolute; 
+    width: 150px; height: 40px; 
+    left: 22px; top: 520px;
+}

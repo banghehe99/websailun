@@ -1,0 +1,25 @@
+#tram10t3{
+   position: absolute;
+   top:30px;
+   left:250px;
+}
+#screen_t10{
+    position: absolute;
+    top:15px;
+    left: 250px;
+}
+#tram10t1{
+    position: absolute;
+    top: 30px;
+    left: 550px;
+}
+#tram10t4{
+    position: absolute;
+    top: 250px;
+    left: 250px;
+}
+#tram10t2{
+    position: absolute;
+    top: 250px;
+    left: 550px;
+}

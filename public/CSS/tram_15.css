@@ -1,0 +1,10 @@
+#screen_t15{   
+        position: absolute;
+        top:15px;
+        left: 250px;
+    }
+#tram15{
+    position: absolute;
+    top:25px;
+    left:250px;
+}

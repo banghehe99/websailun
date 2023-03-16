@@ -1,0 +1,26 @@
+#tram5t1{
+    position: absolute;
+    top:30px;
+    left:250px;
+ }
+ #screen_t5{
+     position: absolute;
+     top:15px;
+     left: 250px;
+ }
+ #tram5t2{
+     position: absolute;
+     top: 30px;
+     left: 550px;
+ }
+ #tram5t3{
+     position: absolute;
+     top: 250px;
+     left: 250px;
+ }
+ #tram5t4{
+     position: absolute;
+     top: 250px;
+     left: 550px;
+ }
+ 

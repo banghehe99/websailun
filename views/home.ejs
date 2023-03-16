@@ -1,0 +1,782 @@
+<html>
+    <!-- Phần Header -->
+    <head>
+        <!-- ////////////// CHƯƠNG TRÌNH HỆ THỐNG //////////////  -->
+        <title>Scada hệ thống giám sát trên internet</title>
+        <script src = "socket.io/socket.io.js"></script>
+        <script src = "js/FC1_Common.js"></script>
+        <script>
+            var socket = io("localhost:5000") // IP tĩnh (hoặc IP động, localhost)
+        </script>
+
+        <link rel="stylesheet" href= "CSS/Screen_main.css">
+        <link rel="stylesheet" href= "CSS/Tram_10.css">
+        <link rel="stylesheet" href= "CSS/Tram_11.css">
+        <link rel="stylesheet" href= "CSS/tram_15.css">
+        <link rel="stylesheet" href= "CSS/slidebar.css">
+        <link rel="stylesheet" href= "CSS/Tram3.css">
+        <link rel="stylesheet" href= "CSS/Tram4.css">
+        <link rel="stylesheet" href= "CSS/Tram9.css">
+        <link rel="stylesheet" href= "CSS/Tram12.css">
+        <link rel="stylesheet" href= "CSS/Tram14.css">
+        <link rel="stylesheet" href= "CSS/Tram_2.css">
+        <link rel="stylesheet" href= "CSS/Tram_5.css">
+    </head>
+    <!-- Phần thân -->
+    <body>
+            <!--Tag dạng Bool-->
+            <!-- <div class="TRAM 1">
+             <label>Tag dạng bool:</label>
+            <input id="tbx_Bool" disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("tag_Bool", "tbx_Bool", 0)</script>      
+            <br /><br />
+            </div> -->
+            
+           
+            <div id="slidebar">
+                <button id="bbt_screen_manin" onclick="
+                fn_ScreenChange('screen_main','screen_t10','screen_t11','screen_t15','screen_t12','screen_t14','screen_t9','screen_t3','screen_t4','screen_t2','screen_t5');
+                fn_ScreenTemp('tram','tram11','tram10','tram15','tram12','tram9','tram14','tram3','tram4','tram2','tram5');
+                ">Màn hình chính</button>
+                
+                <button id="bbt_tram10" onclick="
+                fn_ScreenChange('screen_t10','screen_main','screen_t11','screen_t15','screen_t12','screen_t14','screen_t3','screen_t4','screen_t9','screen_t2','screen_t5');
+                fn_ScreenTemp('tram10','tram11','tram','tram15','tram12','tram9','tram14','tram3','tram4','tram2','tram5');
+                ">Trạm 10</button>
+                <button id="bbt_tram11" onclick="
+                fn_ScreenChange('screen_t11','screen_t10','screen_main','screen_t15','screen_t12','screen_t3','screen_t4','screen_t14','screen_t9','screen_t2','screen_t5');
+                fn_ScreenTemp('tram11','tram','tram10','tram15','tram12','tram9','tram14','tram3','tram4','tram2','tram5');">Trạm 11</button>
+
+                <button id="bbt_tram15" onclick="
+                fn_ScreenChange('screen_t15','screen_t10','screen_main','screen_t11','screen_t12','screen_t14','screen_t3','screen_t4','screen_t9','screen_t2','screen_t5');
+                fn_ScreenTemp('tram15','tram11','tram','tram10','tram12','tram9','tram14','tram3','tram4','tram2','tram5');">Trạm 15</button>
+
+                <button id="bbt_tram12" onclick="
+                fn_ScreenChange('screen_t12','screen_t15','screen_t10','screen_main','screen_t11','screen_t14','screen_t9','screen_t3','screen_t4','screen_t2','screen_t5');
+                fn_ScreenTemp('tram12','tram15','tram11','tram','tram10','tram14','tram9','tram3','tram4','tram2','tram5');">Trạm 12</button>
+
+                <button id="bbt_tram14" onclick="
+                fn_ScreenChange('screen_t14','screen_t12','screen_t15','screen_t10','screen_main','screen_t11','screen_t9','screen_t3','screen_t4','screen_t2','screen_t5');
+                fn_ScreenTemp('tram14','tram12','tram15','tram11','tram','tram10','tram9','tram3','tram4','tram2','tram5');">Trạm 14</button>
+
+                <button id="bbt_tram9" onclick="
+                fn_ScreenChange('screen_t9','screen_t14','screen_t12','screen_t15','screen_t10','screen_main','screen_t11','screen_t3','screen_t4','screen_t2','screen_t5');
+                fn_ScreenTemp('tram9','tram14','tram12','tram15','tram11','tram','tram10','tram3','tram4','tram2','tram5');">Trạm 9</button>
+                <button id="bbt_tram3" onclick="
+                fn_ScreenChange('screen_t3','screen_t9','screen_t14','screen_t12','screen_t15','screen_t10','screen_main','screen_t11','screen_t4','screen_t2','screen_t5');
+                fn_ScreenTemp('tram3','tram9','tram14','tram12','tram15','tram11','tram','tram10','tram4','tram2','tram5');">Trạm 3</button>
+
+                <button id="bbt_tram4" onclick="
+                fn_ScreenChange('screen_t4','screen_t3','screen_t9','screen_t14','screen_t12','screen_t15','screen_t10','screen_main','screen_t11','screen_t2','screen_t5');
+                fn_ScreenTemp('tram4','tram3','tram9','tram14','tram12','tram15','tram11','tram','tram10','tram2','tram5');">Trạm 4</button>
+                <button id="bbt_tram2" onclick="
+                fn_ScreenChange('screen_t2','screen_t4','screen_t3','screen_t9','screen_t14','screen_t12','screen_t15','screen_t10','screen_main','screen_t11','screen_t5');
+                fn_ScreenTemp('tram2','tram4','tram3','tram9','tram14','tram12','tram15','tram11','tram','tram10','tram5');">Trạm 2</button>
+                <button id="bbt_tram5" onclick="
+                fn_ScreenChange('screen_t5','screen_t4','screen_t3','screen_t9','screen_t14','screen_t12','screen_t15','screen_t10','screen_main','screen_t11','screen_t2');
+                fn_ScreenTemp('tram5','tram4','tram3','tram9','tram14','tram12','tram15','tram11','tram','tram10','tram2');">Trạm 5</button>
+            </div>
+    
+        <!-- //////////////Code cho màn hình chính////////////// -->
+    <div id = "screen_main">
+        <h1 style="font-family: 'Courier New', Courier, monospace;left:350px"> --------- WELCOM TO TRAM DIEN -----------</h1>
+        <h2> HÃY ĐẾN ĐÂY VỚI CHÚNG TÔI, NƠI CẦN TIẾNG CƯỜI CHỨ KHÔNG CẦN NGƯỜI LƯỜI </h2>
+        <h3>Đây là website của Trạm điện về thông tin nhiệt độ các máy biến áp ở các trạm điện cuả Công ty SAILUN Việt Nam.</h3>
+        <h3>Công ty Sailun gồm có các trạm điện sau:</h3>
+        <ul>
+            <li> PCR </li>
+            <ul>
+                <li>TRẠM 1</li>
+                <li>TRẠM 2</li>
+                <li>TRẠM 3</li>
+                <li>TRẠM 4</li>
+                <li>TRẠM 5</li>
+                <li>TRẠM 6</li>
+                <li>TRẠM 8</li>
+                <li>TRẠM 15</li>
+            </ul>
+            <li>TBR</li>
+            <ul>
+                <li>TRẠM 7</li>
+                <li>TRẠM 9</li>
+                <li>TRẠM 10</li>
+                <li>TRẠM 11</li>
+                <li>TRẠM 12</li>
+                <li>TRẠM 14</li>
+               
+            </ul>
+        </ul>        
+         </ul>
+  
+    </div> 
+<!-- //////////////Code cho màn hình 2 (trạm 2)////////////// -->
+    <div id = "screen_t10" >
+        <p>Đây là màn hinh trạm 10</p>
+    </div>    
+<!-- //////////////Code cho màn hình 3( trạm 3)////////////// -->
+    <div id = "screen_t11">
+        <p>Đây là màn hình trạm 11</p>
+    </div>
+    <div id = "screen_t15">
+        <p>Đây là màn hình trạm 15</p>
+    </div>
+    <div id = "screen_t12">
+        <p>Đây là màn hình trạm 12</p>
+    </div>
+    <div id = "screen_t14">
+        <p>Đây là màn hình trạm 14</p>
+    </div>
+    <div id = "screen_t9">
+        <p>Đây là màn hình trạm 9</p>
+    </div>
+    <div id = "screen_t3">
+        <p>Đây là màn hình trạm 3</p>
+    </div>
+    <div id = "screen_t4">
+        <p>Đây là màn hình trạm 4</p>
+    </div>
+    <div id = "screen_t2">
+        <p>Đây là màn hình trạm 2</p>
+    </div>
+    <div id = "screen_t5">
+        <p>Đây là màn hình trạm 5</p>
+    </div>
+    
+
+
+
+    <!-- //////////////Code cho màn hình nhiệt độ()////////////// -->
+
+    
+    <div id="tram10">
+        <div id="tram10t3">
+            <h3>10T3</h3>
+            <div id="st10t3">  
+                
+                 <script>fn_status("T10T3_Status","st10t3")</script>  
+                                                            
+             </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_10T3.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T10T3_A", "tag_10T3.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_10T3.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T10T3_B", "tag_10T3.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_10T3.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T10T3_C", "tag_10T3.C",2)</script>
+            </div>
+        </div>
+        <div id="tram10t1">
+            <h3>10T1</h3>
+            <div id="st10t1">  
+                
+                 <script>fn_status("T10T1_Status","st10t1")</script>  
+                                                            
+             </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_10T1.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T10T1_A", "tag_10T1.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_10T1.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T10T1_B", "tag_10T1.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_10T1.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T10T1_C", "tag_10T1.C",2)</script>
+            </div>
+        </div>
+        <div id="tram10t4">
+            <h3>10T4</h3>
+            <div id="st10t4">  
+                
+                 <script>fn_status("T10T4_Status","st10t4")</script>  
+                                                            
+             </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_10T4.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T10T4_A", "tag_10T4.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_10T4.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T10T4_B", "tag_10T4.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_10T4.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T10T4_C", "tag_10T4.C",2)</script>
+            </div>
+        </div>
+        <div id="tram10t2">
+            <h3>10T2</h3>
+            <div id="st10t2">  
+                
+                 <script>fn_status("T10T2_Status","st10t2")</script>  
+                                                            
+             </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_10T2.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T10T2_A", "tag_10T2.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_10T2.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T10T2_B", "tag_10T2.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_10T2.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T10T2_C", "tag_10T2.C",2)</script>
+            </div>
+        </div>
+    </div>
+    <div id="tram11">
+        <div id="tram11T1">
+            <h3>11T1</h3>
+            <div id="st11t1">                  
+                <script>fn_status("T11T1_Status","st11t1")</script>                                                             
+            </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_11T1.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T11T1_A", "tag_11T1.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_11T1.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T11T1_B","tag_11T1.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_11T1.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T11T1_C", "tag_11T1.C",2)</script>
+            </div>
+        </div>
+        <div id="tram11T2">
+            <h3>11T2</h3>
+            <div>
+                <div id="st11t2">                  
+                    <script>fn_status("T11T2_Status","st11t2")</script>                                                             
+                </div>
+                <label>Phase A:</label>
+                <input id="tag_11T2.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T11T2_A", "tag_11T2.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_11T2.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T11T2_B","tag_11T2.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_11T2.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T11T2_C", "tag_11T2.C",2)</script>
+            </div>
+        </div>
+    </div>
+    <div id="tram15">
+        <h3>Trạm 15</h3>
+            <div id="st15t1">                  
+                <script>fn_status("T15T1_Status","st15t1")</script>                                                             
+            </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_15T1.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T15T1_A", "tag_15T1.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_15T1.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T15T1_B","tag_15T1.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_15T1.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T15T1_C", "tag_15T1.C",2)</script>
+            </div>
+    </div>
+    <div id="tram"></div>
+    <div id="tram12">
+        <div id="tram12T1">
+            <h3>12T1</h3>
+            <div id="st12t1">  
+                
+                <script>fn_status("T12T1_Status","st12t1")</script>  
+                                                           
+            </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_12T1.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T12T1_A", "tag_12T1.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_12T1.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T12T1_B","tag_12T1.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_12T1.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T12T1_C", "tag_12T1.C",2)</script>
+            </div>
+        </div>
+        <div id="tram12T2">
+            <h3>12T2</h3>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_12T2.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T12T2_A", "tag_12T2.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_12T2.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T12T2_B","tag_12T2.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_12T2.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T12T2_C", "tag_12T2.C",2)</script>
+            </div>
+        </div>
+    </div>
+    <div id="tram14">
+        <h3>Trạm 14</h3>
+        <div id="st14">                  
+            <script>fn_status("T14T1_Status","st14")</script>                                                             
+        </div>
+        <div>
+            <label>Phase A:</label>
+            <input id="tag_14T1.A" disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("T14T1_A", "tag_14T1.A",2)</script>
+        </div>
+        <div>
+            <label>Phase B:</label>
+            <input id="tag_14T1.B" disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("T14T1_B","tag_14T1.B",2)</script>
+        </div>
+        <div>
+            <label>Phase C:</label>
+            <input id="tag_14T1.C" disabled="disabled" type="text" />
+            <script>fn_IOFieldDataShow("T14T1_C", "tag_14T1.C",2)</script>
+        </div>
+    </div>
+ 
+    <div id="tram9">
+        <div id="tram9T1">
+            <h3>9T1</h3>
+            <div id="st9t1">  
+                
+                <script>fn_status("T9T1_Status","st9t1")</script>  
+                                                           
+            </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_9T1.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T9T1_A", "tag_9T1.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_9T1.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T9T1_B","tag_9T1.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_9T1.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T9T1_C", "tag_9T1.C",2)</script>
+            </div>
+        </div>
+        <div id="tram9T2">
+            <h3>9T2</h3>
+            <div id="st9t2">  
+                
+                <script>fn_status("T9T2_Status","st9t2")</script>  
+                                                           
+            </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_9T2.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T9T2_A", "tag_9T2.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_9T2.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T9T2_B","tag_9T2.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_9T2.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T9T2_C", "tag_9T2.C",2)</script>
+            </div>
+        </div>
+
+        <div id="tram9T3">
+            <h3>9T3</h3>
+            <div id="st9t3">  
+                
+                <script>fn_status("T9T3_Status","st9t3")</script>  
+                                                           
+            </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_9T3.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T9T3_A", "tag_9T3.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_9T3.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T9T3_B","tag_9T3.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_9T3.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T9T3_C", "tag_9T3.C",2)</script>
+            </div>
+        </div>
+
+        <div id="tram9T4">
+            <h3>9T4</h3>
+            <div id="st9t4">  
+                
+                <script>fn_status("T9T4_Status","st9t4")</script>  
+                                                           
+            </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_9T4.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T9T4_A", "tag_9T4.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_9T4.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T9T4_B","tag_9T4.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_9T4.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T9T4_C", "tag_9T4.C",2)</script>
+            </div>
+        </div>
+    </div>
+    <div id="tram3">
+        <div id="tram3T1">
+            <h3>3T1</h3>
+            <div id="st3t1">  
+                
+                <script>fn_status("T3T1_Status","st3t1")</script>  
+                                                           
+            </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_3T1.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T3T1_A", "tag_3T1.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_3T1.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T3T1_B","tag_3T1.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_3T1.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T3T1_C", "tag_3T1.C",2)</script>
+            </div>
+        </div>
+        <div id="tram3T2">
+            <h3>3T2</h3>
+            <div id="st3t2">  
+                
+                <script>fn_status("T3T2_Status","st3t2")</script>  
+                                                           
+            </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_3T2.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T3T2_A", "tag_3T2.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_3T2.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T3T2_B","tag_3T2.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_3T2.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T3T2_C", "tag_3T2.C",2)</script>
+            </div>
+        </div>
+    </div>
+    <div id="tram4">
+        <div id="tram4T1">
+            <h3>4T1</h3>
+            <div id="st4t1">  
+                
+                <script>fn_status("T4T1_Status","st4t1")</script>  
+                                                           
+            </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_4T1.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T4T1_A", "tag_4T1.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_4T1.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T4T1_B","tag_4T1.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_4T1.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T4T1_C", "tag_4T1.C",2)</script>
+            </div>
+        </div>
+        <div id="tram4T2">
+            <h3>4T2</h3>
+            <div id="st4t2">  
+                
+                <script>fn_status("T4T2_Status","st4t2")</script>  
+                                                           
+            </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_4T2.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T4T2_A", "tag_4T2.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_4T2.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T4T2_B","tag_4T2.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_4T2.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T4T2_C", "tag_4T2.C",2)</script>
+            </div>
+        </div>
+        <div id="tram4T3">
+            <h3>4T3</h3>
+            <div id="st4t3">  
+                
+                <script>fn_status("T4T3_Status","st4t3")</script>  
+                                                           
+            </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_4T3.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T4T3_A", "tag_4T3.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_4T3.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T4T3_B","tag_4T3.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_4T3.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T4T3_C", "tag_4T3.C",2)</script>
+            </div>
+        </div>
+    </div>
+    <div id="tram2">
+        <div id="tram2t1">
+            <h3>2T1</h3>
+            <div id="st2t1">  
+                
+                 <script>fn_status("T2T1_Status","st2t1")</script>  
+                                                            
+             </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_2T1.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T2T1_A", "tag_2T1.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_2T1.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T2T1_B", "tag_2T1.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_2T1.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T2T1_C", "tag_2T1.C",2)</script>
+            </div>
+        </div>
+        <div id="tram2t2">
+            <h3>2T2</h3>
+            <div id="st2t2">  
+                
+                 <script>fn_status("T2T2_Status","st2t2")</script>  
+                                                            
+             </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_2T2.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T2T2_A", "tag_2T2.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_2T2.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T2T2_B", "tag_2T2.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_2T2.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T2T2_C", "tag_2T2.C",2)</script>
+            </div>
+        </div>
+        <div id="tram2t3">
+            <h3>2T3</h3>
+            <div id="st2t3">  
+                
+                 <script>fn_status("T2T3_Status","st2t3")</script>  
+                                                            
+             </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_2T3.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T2T3_A", "tag_2T3.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_2T3.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T2T3_B", "tag_2T3.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_2T3.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T2T3_C", "tag_2T3.C",2)</script>
+            </div>
+        </div>
+
+        <div id="tram2t4">
+            <h3>2T4</h3>
+            <div id="st2t4">  
+                
+                 <script>fn_status("T2T4_Status","st2t4")</script>  
+                                                            
+             </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_2T4.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T2T4_A", "tag_2T4.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_2T4.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T2T4_B", "tag_2T4.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_2T4.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T2T4_C", "tag_2T4.C",2)</script>
+            </div>
+        </div>                       
+    </div>
+    <div id="tram5">
+        <div id="tram5t1">
+            <h3>5T1</h3>
+            <div id="st5t1">  
+                
+                 <script>fn_status("T5T1_Status","st5t1")</script>  
+                                                            
+             </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_5T1.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T5T1_A", "tag_5T1.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_5T1.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T5T1_B", "tag_5T1.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_5T1.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T5T1_C", "tag_5T1.C",2)</script>
+            </div>
+        </div>
+        <div id="tram5t2">
+            <h3>5T2</h3>
+            <div id="st5t2">  
+                
+                 <script>fn_status("T5T2_Status","st5t2")</script>  
+                                                            
+             </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_5T2.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T5T2_A", "tag_5T2.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_5T2.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T5T2_B", "tag_5T2.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_5T2.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T5T2_C", "tag_5T2.C",2)</script>
+            </div>
+        </div>
+        <div id="tram5t3">
+            <h3>5T3</h3>
+            <div id="st5t3">  
+                
+                 <script>fn_status("T5T3_Status","st5t3")</script>  
+                                                            
+             </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_5T3.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T5T3_A", "tag_5T3.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_5T3.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T5T3_B", "tag_5T3.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_5T3.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T5T3_C", "tag_5T3.C",2)</script>
+            </div>
+        </div>
+
+        <div id="tram5t4">
+            <h3>5T4</h3>
+            <div id="st5t4">  
+                
+                 <script>fn_status("T5T4_Status","st5t4")</script>  
+                                                            
+             </div>
+            <div>
+                <label>Phase A:</label>
+                <input id="tag_5T4.A" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T5T4_A", "tag_5T4.A",2)</script>
+            </div>
+            <div>
+                <label>Phase B:</label>
+                <input id="tag_5T4.B" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T5T4_B", "tag_5T4.B",2)</script>
+            </div>
+            <div>
+                <label>Phase C:</label>
+                <input id="tag_5T4.C" disabled="disabled" type="text" />
+                <script>fn_IOFieldDataShow("T5T4_C", "tag_5T4.C",2)</script>
+            </div>
+        </div>                       
+    </div>
+    </body>
+</html>

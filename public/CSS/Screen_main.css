@@ -1,0 +1,9 @@
+#screen_main{
+    position: absolute;
+    top:15px;left: 250px;
+}
+#tram{
+    position: absolute;
+    top:30px;
+    left:250px;
+ }

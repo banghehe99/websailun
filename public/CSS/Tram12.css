@@ -1,0 +1,15 @@
+#screen_t12{
+    position: absolute;
+    top:15px;
+    left: 250px;
+}
+#tram12T1{
+    position: absolute;
+    top:25px;
+    left: 250px;
+}
+#tram12T2{
+    position: absolute;
+    top:25px;
+    left: 550px;
+}
